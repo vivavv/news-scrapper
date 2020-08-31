@@ -1,5 +1,7 @@
 from abstract.pages.soompi import Soompi
-print(__name__)
+from db import db_schema
+
+db_schema()
 
 page = Soompi()
 
