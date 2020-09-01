@@ -5,7 +5,7 @@ def db_create_table(conn):
     conn.execute('''CREATE TABLE IF NOT EXISTS ARTICLES 
                     (
                     TITLE          TEXT    NOT NULL,
-                    LINK           TEXT    NOT NULL,
+                    LINK           TEXT    PRIMARY KEY NOT NULL,
                     DESCRIPTION    TEXT    NOT NULL,
                     PAGE_URL       TEXT    NOT NULL,
                     PAGE_NAME      TEXT    NOT NULL);''')

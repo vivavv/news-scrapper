@@ -43,6 +43,6 @@ class AbstractScrapper(ABC):
         conn = get_connection()
         conn.executemany(
             '''INSERT INTO ARTICLES (TITLE, LINK, DESCRIPTION, PAGE_URL, PAGE_NAME) 
-            VALUES (?,?,?,?,?);''', rows)
+            VALUES (?,?,?,?,?) ON CONFLICT DO NOTHING;''', rows)
         conn.commit()
         conn.close()
