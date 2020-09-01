@@ -1,12 +1,14 @@
 import requests
 from ..abstract import AbstractScrapper
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 print(__name__)
 
 
 class Soompi(AbstractScrapper):
 
+    page_name = 'Soompi'
     url = "https://www.soompi.com/"
 
     def get_all_articles(self):
@@ -18,15 +20,14 @@ class Soompi(AbstractScrapper):
 
         for result in results:
             saved = {}
-            saved['Title'] = result.get_attribute('title')
-            saved['Link'] = result.get_attribute('href')
+            saved['title'] = result.get_attribute('title')
+            saved['link'] = result.get_attribute('href')
             articles_soompi.append(saved)
 
         return articles_soompi
 
     def get_article_description(self, article):
-        driver = webdriver.Chrome(ChromeDriverManager().install())
-        driver.get(article['Link'])
-        desc = driver.find_elements_by_css_selector(
+        self.driver.get(article['link'])
+        desc = self.driver.find_elements_by_css_selector(
             "div.article-wrapper > div p")
         return(desc[0].text)
